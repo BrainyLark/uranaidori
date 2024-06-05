@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>.::Uranaidoori::.</title>
+</head>
+<body>
+    <header class="sticky top-0 z-10">
+        <section class="max-w-4xl mx-auto p-4 flex justify-between items-center">
+            {% load static %}
+            <img class="h-24 w-auto" src="{% static 'uranai.png' %}" alt="Uranai sama no te to rogo desu.">
+            <div>
+                <button id="hamburger-button" class="text-2xl md:hidden focus:outline-none">
+                    &#9776;
+                </button>
+                <nav class="hidden font-light md:block space-x-8 text-base font-sans" aria-label="main">
+                    <a href="/">🏰 Home</a>
+                    <a href="#">📚 Manual</a>
+                    <a href="{% url 'products:index' %}">🤖 Train model</a>
+                    <a href="#">🔮 Forecast</a>
+                </nav>
+            </div>
+        </section>
+    </header>
+
+    {% block content %}
+    {% endblock  %}
+
+    {% load static %}
+    <script type="text/javascript" src="{% static 'script.js' %}"></script>
+</body>
+</html>

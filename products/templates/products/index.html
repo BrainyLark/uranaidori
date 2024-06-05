@@ -1,0 +1,10 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<form action="{% url 'products:index' %}" method="post" class="form-elements">
+    {% csrf_token %}
+    {{ form }}
+</form>
+
+{% endblock %}
