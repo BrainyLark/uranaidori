@@ -19,15 +19,15 @@
                 <nav class="hidden font-light md:block space-x-8 text-base font-sans" aria-label="main">
                     <a href="/">🏰 Home</a>
                     <a href="#">📚 Manual</a>
-                    <a href="{% url 'products:index' %}">🤖 Train model</a>
-                    <a href="#">🔮 Forecast</a>
+                    <a href="{% url 'train:index' %}">🤖 Train model</a>
+                    <a href="{% url 'predict:index' %}">🔮 Forecast</a>
                 </nav>
             </div>
         </section>
     </header>
 
     {% block content %}
-    {% endblock  %}
+    {% endblock content %}
 
     {% load static %}
     <script type="text/javascript" src="{% static 'script.js' %}"></script>

@@ -1,0 +1,49 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class="flex items-center justify-center">
+    <div class="w-2/3 p-4" style="border: 1px solid gray;">
+        
+        <form method="post" action="{% url 'train:index' %}">
+            {% csrf_token %}
+            <label for="task">Choose the task:</label>
+
+            <select name="task" id="tasks" onchange="document.getElementById('cmd').value='task'; this.form.submit();">
+                <option value="" selected disabled hidden>-------- Choose task --------</option>
+                <option value="classification">Supervised Learning - Classification</option>
+                <option value="regression">Supervised Learning - Regression</option>
+                <option value="unsupervised">Unsupervised Learning - Clustering, PCA</option>
+            </select>
+            
+            {% if state.task == 'classification' %}
+            <br>
+            <br>
+            <label for="alg_cls">Choose the classification algorithm:</label>
+            
+            <select name="alg_cls" id="algorithms_cls" onchange="document.getElementById('cmd').value='alg_class'; this.form.submit();">
+                <option value="" selected disabled hidden>-------- Choose algorithm --------</option>
+                <option value="blr">Binary classification</option>
+                <option value="svc">Support Vector Machine (Binary)</option>
+                <option value="net">Artificial Neural Network</option>
+            </select>
+            {% elif state.task == 'regression' %}
+            <br>
+            <br>
+            <label for="alg_reg">Choose the regression algorithm:</label>
+
+            <select name="alg_reg" id="algorithms_reg" onchange="document.getElementById('cmd').value='alg_regress'; this.form.submit();">
+                <option value="" selected disabled hidden>-------- Choose algorithm --------</option>
+                <option value="ldf">Linear discriminant function</option>
+                <option value="svr">Support Vector Machine</option>
+                <option value="net">Artificial Neural Network</option>
+            </select>
+            {% endif %}
+
+            <input type="hidden" id="cmd" name="cmd">
+        </form>
+
+    </div>
+</div>
+
+{% endblock content %}
