@@ -7,9 +7,9 @@
         
         <form method="post" action="{% url 'train:index' %}">
             {% csrf_token %}
-            <label for="task">Choose the task:</label>
+            <label for="tasks">Choose the task:</label>
 
-            <select name="task" id="tasks" onchange="document.getElementById('cmd').value='task'; this.form.submit();">
+            <select name="task" id="tasks" onchange="send(this, 'task_chosen');">
                 <option value="" selected disabled hidden>-------- Choose task --------</option>
                 <option value="classification">Supervised Learning - Classification</option>
                 <option value="regression">Supervised Learning - Regression</option>
@@ -19,9 +19,9 @@
             {% if state.task == 'classification' %}
             <br>
             <br>
-            <label for="alg_cls">Choose the classification algorithm:</label>
+            <label for="algorithms_cls">Choose the classification algorithm:</label>
             
-            <select name="alg_cls" id="algorithms_cls" onchange="document.getElementById('cmd').value='alg_class'; this.form.submit();">
+            <select name="algorithm" id="algorithms_cls" onchange="send(this, 'algorithm_chosen');">
                 <option value="" selected disabled hidden>-------- Choose algorithm --------</option>
                 <option value="blr">Binary classification</option>
                 <option value="svc">Support Vector Machine (Binary)</option>
@@ -30,9 +30,9 @@
             {% elif state.task == 'regression' %}
             <br>
             <br>
-            <label for="alg_reg">Choose the regression algorithm:</label>
+            <label for="algorithms_reg">Choose the regression algorithm:</label>
 
-            <select name="alg_reg" id="algorithms_reg" onchange="document.getElementById('cmd').value='alg_regress'; this.form.submit();">
+            <select name="algorithm" id="algorithms_reg" onchange="send(this, 'algorithm_chosen');">
                 <option value="" selected disabled hidden>-------- Choose algorithm --------</option>
                 <option value="ldf">Linear discriminant function</option>
                 <option value="svr">Support Vector Machine</option>
@@ -40,7 +40,35 @@
             </select>
             {% endif %}
 
+            {% if state.algorithm == 'svc' %}
+            <br>
+            <br>
+            <label for="svm_param_c">Regularization parameter C</label>
+            <input type="number" id="svm_param_c" name="svm_param_c" value=1.0>
+            <br>
+            <br>
+            <label for="svm_param_kernel">Kernel</label>
+            <select name="svm_param_kernel" id="svm_param_kernel">
+                <option value="linear">linear</option>
+                <option value="poly">polynomial</option>
+                <option value="rbf">radial basis function</option>
+            </select>
+            <br>
+            <br>
+            <label for="svm_param_degree">Degree (only for polynomial kernel)</label>
+            <input type="number" id="svm_param_degree" name="svm_param_degree" value=3>
+            <br>
+            <br>
+            <label for="input_dataset">Select input dataset:</label>
+            <input type="file" id="input_dataset", name="input_dataset">
+            <br>
+            <br>
+            <button type="submit">Submit</button>
+            {% endif %}
+
             <input type="hidden" id="cmd" name="cmd">
+            <input type="hidden" id="task" name="task_chosen" value="{{ state.task }}">
+            <input type="hidden" id="algorithm" name="algorithm_chosen" value="{{ state.algorithm }}">
         </form>
 
     </div>

@@ -1,4 +1,4 @@
-function handleSubmission(selectElement, command) {
-    document.getElementById("cmd").value = command;
-    selectElement.form.submit();
+function send(field, cmd) {
+    document.getElementById('cmd').value=cmd;
+    field.form.submit();
 }

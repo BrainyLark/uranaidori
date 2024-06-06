@@ -12,9 +12,15 @@ def index(request):
 
     if request.method == 'POST':
         cmd = request.POST['cmd']
-        if cmd == 'task':
+        if cmd == 'task_chosen':
             task: str = request.POST['task']
             state = State(cmd, task, None)
+
+        elif cmd == 'algorithm_chosen':
+            task: str = request.POST['task_chosen']
+            algorithm: str = request.POST['algorithm']
+            state = State(cmd, task, algorithm)
+
         else:
             state = State(0, None, None)
 
